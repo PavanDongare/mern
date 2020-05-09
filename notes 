@@ -1,0 +1,17 @@
+npm init
+package name: (mern) 
+version: (1.0.0) 
+description: social network for developers
+entry point: (index.js) server.js
+test command: 
+git repository: (https://github.com/PavanDongare/mern.git) 
+keywords: 
+author: pavan
+license: (ISC) MIT
+========================================================================================================
+npm i express express-validator bcryptjs config gravatar jsonwebtoken request
+
+npm i -D nodemon concurrently // concurrently runs api & ui at same time
+
+
+
