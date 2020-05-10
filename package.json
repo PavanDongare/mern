@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node server",
-    "local":"nodemon server"
+    "start": "node server",
+    "local": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,8 @@
     "express-validator": "^6.4.1",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
