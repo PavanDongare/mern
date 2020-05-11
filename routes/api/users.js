@@ -11,6 +11,10 @@ const pool = require('../../dbConnection');// ./ is next ../ is back
 // api/users
 // test   route
 // access public
+
+ //pool.query(`INSERT into user (email,name,password,avatar) values(${email},${name},${passsword},${avatar})`, (error, result) => {
+                       //INSERT into user (email,name,password,avatar) values('1','2','123456','aa');
+
 router.post('/',
     [check('name','Name is Required')
         .not()
@@ -19,44 +23,30 @@ router.post('/',
      check('password','Please enter a password with 6 or more characters').isLength({min:6})
     ]
    ,async (req,res)=>
-   {
-       const errors= validationResult(req);
-       if(errors.isEmpty()){
-            return res.status(200).json('success');
-       }else {
-        
-
-        const { name,email,passsword } = req.body;
-
-        try {
-             // check if user exists
-     
-             // check gravatar
-             const avatar = gravatar.url(email,{s:200,r:'pg',d:'mm'});
-
-             user =  new User({
-
-             })
-     
-             // encrypt password: we get this in text?
-             const salt = await bcrypt.genSalt(10);
-             user.passsword = await bcrypt.hash(passsword,salt);
-
-             pool.query('INSERT into user (email,name,password,avatar) values()', (error, result) => {
-                if (error) res.send(error);
-                res.send(result);
-            });
-            // name
-
-
-             // return jsonwebtoken
-        } catch(err) {
-            return res.status(400).json({errors: errors.array()});
-        }
-
-       
+   {    
+       const errors = validationResult(req);
+       if(!errors.isEmpty()){
+           return res.status(400).json({errors: errors.array});
        }
-       res.send('user route')
+
+       const {name,email,password} = req.body
+       const avatar = gravatar.url(email,{s:200,r:'pg',d:'mm'});
+       
+       const salt =  await bcrypt.genSalt(10);
+       pwd   = await bcrypt.hash(password,salt);
+       console.log(pwd);
+
+       //return res.status(200).json(name);
+       try {
+           pool.query(`INSERT into user (email,name,password,avatar) 
+                                  values('${email}','${name}','${pwd}','${avatar}' )`, (error, result) => {
+               if (error) res.send(error);
+               res.send(result);
+           });
+       } catch(err){
+           console.log(err);
+           res.status(500).send('server error');
+       }
    }
 
 );

@@ -13,6 +13,9 @@ app.get('/',(req,res)=> {
 });
 
 
+// init middlewear for req.body
+app.use(express.json({extended: false}));
+
 // define routes
 app.use('/api/users',require('./routes/api/users'));
 app.use('/api/post',require('./routes/api/post'));
