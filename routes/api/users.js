@@ -4,6 +4,8 @@ const { check, validationResult } = require('express-validator');
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const pool = require('../../dbConnection');// ./ is next ../ is back
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 
 
@@ -26,7 +28,7 @@ router.post('/',
    {    
        const errors = validationResult(req);
        if(!errors.isEmpty()){
-           return res.status(400).json({errors: errors.array});
+           return res.status(400).json({errors: errors});
        }
 
        const {name,email,password} = req.body
@@ -39,9 +41,25 @@ router.post('/',
        //return res.status(200).json(name);
        try {
            pool.query(`INSERT into user (email,name,password,avatar) 
-                                  values('${email}','${name}','${pwd}','${avatar}' )`, (error, result) => {
-               if (error) res.send(error);
-               res.send(result);
+                                  values('${email}','${name}','${pwd}','${avatar}' ); `, (error, result) => {
+               if (error) 
+                    res.send(error); 
+               else {
+                   //res.send(result);
+                   const payload = {
+                       user: {
+                           id : email
+                       }
+                   }
+                   jwt.sign(payload,
+                            config.get('jwtSecret'),
+                            {expiresIn:36000},
+                            (err,token)=>{
+                                if(err) throw err;
+                                res.json({token});
+                            });
+               }  
+                    
            });
        } catch(err){
            console.log(err);

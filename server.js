@@ -24,3 +24,10 @@ app.use('/api/auth',require('./routes/api/auth'));
 
 
 app.listen(PORT,()=> console.log(`server on ${PORT}`)); // `` directly access var in string
+
+
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ', err);
+});
+  
+  
