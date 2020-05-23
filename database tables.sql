@@ -2,11 +2,12 @@ CREATE TABLE profiles(
 'profile_id' int(20) NOT NULL AUTO_INCREMENT,
 'email' VARCHAR(255) NOT NULL,
 'name' VARCHAR(255) NOT NULL,
-'company' VARCHAR(255) NOT NULL,
+'company' VARCHAR(255) ,
+'website' VARCHAR(255) ,
+'location' VARCHAR(255),
 
 PRIMARY KEY ('profile_id'),
 UNIQUE KEY 'email' ('email'),
-
 FOREIGN KEY ('email') REFERENCES user('email')
 );
 
