@@ -28,7 +28,7 @@ FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 
 CREATE TABLE Social(
 `social_id` int(20) NOT NULL AUTO_INCREMENT,
-`profile_id` int(20) NOT NULL
+`profile_id` int(20) NOT NULL,
 
 `linkedin` VARCHAR(255),
 `facebook`  VARCHAR(255),
@@ -42,7 +42,7 @@ FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 
 CREATE TABLE Posts(
 `post_id` int(20) NOT NULL AUTO_INCREMENT,
-`profile_id` int(20) NOT NULL
+`profile_id` int(20) NOT NULL,
 
 `caption`  VARCHAR(255) NOT NULL,
 `text` TEXT NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE Comments(
 
 PRIMARY KEY (`comment_id`),
 
-FOREIGN KEY (`post_id`) REFERENCES Posts(`post_id`)
+FOREIGN KEY (`post_id`) REFERENCES Posts(`post_id`),
 FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 
 );
