@@ -1,4 +1,4 @@
-CREATE TABLE profiles(
+CREATE TABLE Profiles(
 'profile_id' int(20) NOT NULL AUTO_INCREMENT,
 'email' VARCHAR(255) NOT NULL,
 'name' VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE Experience(
 'date_from' DATE NOT NULL,
 
 PRIMARY KEY ('experience_id'),
-FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
+FOREIGN KEY ('profile_id') REFERENCES Profiles('profile_id')
 );
 
 
@@ -36,7 +36,7 @@ CREATE TABLE Social(
 
 
 PRIMARY KEY ('social_id'),
-FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
+FOREIGN KEY ('profile_id') REFERENCES Profiles('profile_id')
 );
 
 
@@ -44,56 +44,39 @@ CREATE TABLE Posts(
 'post_id' int(20) NOT NULL AUTO_INCREMENT,
 'profile_id' int(20) NOT NULL
 
-'caption'  VARCHAR(255),
+'caption'  VARCHAR(255) NOT NULL,
 'text' TEXT NOT NULL,
 
-
-'date_created' DATE NOT NULL,
-'date_updated' DATE,
 PRIMARY KEY ('post_id'),
-FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
-);
-
-
-CREATE TABLE Followings(
-'profile_id' INT NOT NULL, 
-'following_id' INT NOT NULL, 
-'date_created' DATE NOT NULL,
-PRIMARY KEY ('profile_id', 'following_id'),
-UNIQUE INDEX ('following_id', 'profile_id')
-FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
-FOREIGN KEY ('following_id') REFERENCES profiles('profile_id')
+FOREIGN KEY ('profile_id') REFERENCES Profiles('profile_id')
 );
 
 CREATE TABLE Comments(
 'comment_id' INT(20) NOT NULL AUTO_INCREMENT,
+
 'post_id' INT(20) NOT NULL,
 'profile_id' INT(20) NOT NULL,
+
 'content' TEXT NOT NULL,
 'date_created' DATE NOT NULL,
-'date_updated' DATE,
+
 PRIMARY KEY ('comment_id'),
+
 FOREIGN KEY ('post_id') REFERENCES Posts('post_id')
-FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
+FOREIGN KEY ('profile_id') REFERENCES Profiles('profile_id')
+
 );
 
-CREATE TABLE Messages(
-'message_id' INT(20) NOT NULL AUTO_INCREMENT,
-'profile_id_from' INT(20) NOT NULL,
-'profile_id_to' INT(20) NOT NULL,
-'content' text NOT NULL,
-'date_created' date NOT NULL,
-PRIMARY KEY ('message_id'),
-FOREIGN KEY ('profile_id_from') REFERENCES profiles('profile_id'),
-FOREIGN KEY ('profile_id_to') REFERENCES profiles('profile_id')
-);
 
 CREATE TABLE Likes(
 'profile_id' INT(20) NOT NULL AUTO_INCREMENT,
 'post_id' int(20) NOT NULL,
 'date_created' DATE NOT NULL,
-PRIMARY KEY ('profile_id', 'post_id'),
-UNIQUE INDEX ('post_id', 'profile_id'),
+
+PRIMARY KEY ('profile_id', 'post_id'), /* only one like for a post from profile, but comments can be many */
+UNIQUE INDEX ('post_id', 'profile_id'), 
+
+
 FOREIGN KEY ('post_id') REFERENCES Posts('post_id'),
-FOREIGN KEY ('profile_id') REFERENCES profile('profile_id')
+FOREIGN KEY ('profile_id') REFERENCES Profiles('profile_id')
 );
