@@ -11,6 +11,21 @@ UNIQUE KEY 'email' ('email'),
 FOREIGN KEY ('email') REFERENCES user('email')
 );
 
+CREATE TABLE Experience(
+'experience_id' int(20) NOT NULL AUTO_INCREMENT,
+'profile_id' int(20) NOT NULL
+
+'location' VARCHAR(255),
+'title'  VARCHAR(255),
+'company' VARCHAR(255) ,
+'date_to' DATE NOT NULL,
+'date_from' DATE NOT NULL,
+
+PRIMARY KEY ('experience_id'),
+FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
+);
+
+
 CREATE TABLE Posts(
 'post_id' int(20) NOT NULL AUTO_INCREMENT,
 'profile_id' int(20) NOT NULL
