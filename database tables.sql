@@ -13,7 +13,7 @@ FOREIGN KEY (`email`) REFERENCES user(`email`)
 
 CREATE TABLE Experience(
 `experience_id` int(20) NOT NULL AUTO_INCREMENT,
-`profile_id` int(20) NOT NULL
+`profile_id` int(20) NOT NULL,
 
 `location` VARCHAR(255),
 `title`  VARCHAR(255),
