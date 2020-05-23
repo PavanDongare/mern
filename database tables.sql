@@ -26,6 +26,20 @@ FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
 );
 
 
+CREATE TABLE Social(
+'social_id' int(20) NOT NULL AUTO_INCREMENT,
+'profile_id' int(20) NOT NULL
+
+'linkedin' VARCHAR(255),
+'facebook'  VARCHAR(255),
+'othersite' VARCHAR(255) ,
+
+
+PRIMARY KEY ('social_id'),
+FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
+);
+
+
 CREATE TABLE Posts(
 'post_id' int(20) NOT NULL AUTO_INCREMENT,
 'profile_id' int(20) NOT NULL
