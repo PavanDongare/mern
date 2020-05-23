@@ -16,7 +16,7 @@ const config = require('config');
 
  //pool.query(`INSERT into user (email,name,password,avatar) values(${email},${name},${passsword},${avatar})`, (error, result) => {
                        //INSERT into user (email,name,password,avatar) values('1','2','123456','aa');
-
+// post SignUp
 router.post('/',
     [check('name','Name is Required')
         .not()
@@ -58,8 +58,7 @@ router.post('/',
                                 if(err) throw err;
                                 res.json({token});
                             });
-               }  
-                    
+               }     
            });
        } catch(err){
            console.log(err);

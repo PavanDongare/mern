@@ -1,3 +1,5 @@
+ // this middleware just decrypts token & attaches uerid to req
+ 
  const jwt = require('jsonwebtoken');
  const config = require('config');
 
