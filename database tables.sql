@@ -43,11 +43,11 @@ FOREIGN KEY ('profile_id') REFERENCES profiles('profile_id')
 CREATE TABLE Posts(
 'post_id' int(20) NOT NULL AUTO_INCREMENT,
 'profile_id' int(20) NOT NULL
+
 'caption'  VARCHAR(255),
-'latitude' FLOAT NOT NULL,
-'longitude' FLOAT NOT NULL,
-'type' ENUM('image', 'video'),
-'post_url' VARCHAR(255) NOT NULL,
+'text' TEXT NOT NULL,
+
+
 'date_created' DATE NOT NULL,
 'date_updated' DATE,
 PRIMARY KEY ('post_id'),
