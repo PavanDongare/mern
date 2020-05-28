@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controller/userController')
+const { check } = require('express-validator');
 
 
 validator = [check('name','Name is Required')

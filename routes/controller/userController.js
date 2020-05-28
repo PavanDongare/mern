@@ -4,7 +4,7 @@ const pool = require('../../dbConnection');// ./ is next ../ is back
 
 const { validationResult } = require('express-validator');
 const helperFunctions = require('./helperFunctions')
-const { check } = require('express-validator');
+
 
 
 
