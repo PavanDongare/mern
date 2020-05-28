@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const helperFunctions = require('./helperFunctions')
+
 
 getUserData= (req,res)=>{ 
     pool.query(`select * from user where email = '${req.user.id}'`, 
@@ -17,56 +19,28 @@ getUserData= (req,res)=>{
        });
     } 
 
-
-
-// post 
 loginWithPassword = async (req,res)=>
 {    
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors});
     }
-
-
-    const {email,password} = req.body // extracts from request
     try {
-        pool.query(`select * from user where email = '${email}' `,
+        pool.query(`select * from user where email = '${req.body.email}' `,
         async (err,sqlResult)=>{
             console.log(sqlResult);
-            if(err)
-              res.status(400).json(err);
-            else{
-              const passwordFromTable = sqlResult[0]['password'];
-              const isMatch = await bcrypt.compare(password,passwordFromTable);
+            err? res.status(400).json(err): null ;
 
-              if(isMatch)
-              {
-                 const payload = {
-                     user: {
-                         id : email
-                     }
-                 }
-                 jwt.sign(payload,
-                          config.get('jwtSecret'),
-                          {expiresIn:36000},
-                          (err,token)=>{
-                              if(err) throw err;
-                              res.json({token});
-                          });
-              }
-              else
-                 res.status(400).json('wrong password');
-            } 
+            const passwordFromTable = sqlResult[0]['password'];
+            const isMatch = await bcrypt.compare(req.body.password,passwordFromTable);
+            isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
         });
-
     } catch(err){
         console.log(err);
         res.status(500).send('server error');
     }
 }
 
-getJwt = async (err,result,req)=>{
-}
 
 module.exports = {
     getUserData,

@@ -17,9 +17,5 @@ router.get('/' , authMiddleWare, profileController.getProfileData);
 router.post('/', authMiddleWare, validatorGetProfile,profileController.createProfile)
 
 
-
-
-
-
 module.exports = router;
 

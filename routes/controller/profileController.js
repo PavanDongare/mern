@@ -1,6 +1,7 @@
 const pool = require('../../dbConnection');
 const { validationResult } = require('express-validator');
 
+
 getProfileData = (req,res) => { 
    pool.query(`SELECT * FROM profiles WHERE email  = '${req.user.id}' LIMIT 1 `, 
        (err,result)=>{
