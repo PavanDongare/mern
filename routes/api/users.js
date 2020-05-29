@@ -11,6 +11,6 @@ validator = [check('name','Name is Required')
             check('password','Please enter a password with 6 or more characters').isLength({min:6})
             ];
 
-router.post('/',validator,userController.signUpWithPassword);
+router.post('/signup',validator,userController.signUpWithPassword);
 
 module.exports = router;
