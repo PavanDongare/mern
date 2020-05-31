@@ -9,7 +9,7 @@ CREATE TABLE Profiles(
 PRIMARY KEY (`profile_id`),
 UNIQUE KEY `email` (`email`),
 FOREIGN KEY (`email`) REFERENCES user(`email`)
-);
+); /* simple table with just one ref email, edited later to remove others*/ 
 
 CREATE TABLE Experience(
 `experience_id` int(20) NOT NULL AUTO_INCREMENT,
@@ -80,3 +80,4 @@ UNIQUE INDEX (`post_id`, `profile_id`),
 FOREIGN KEY (`post_id`) REFERENCES Posts(`post_id`),
 FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 );
+
