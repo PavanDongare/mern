@@ -29,7 +29,6 @@ loginWithPassword = async (req,res)=>
         async (err,sqlResult)=>{
             console.log(sqlResult);
             err? res.status(400).json(err): null ;
-
             const passwordFromTable = sqlResult[0]['password'];
             const isMatch = await bcrypt.compare(req.body.password,passwordFromTable);
             isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
@@ -66,5 +65,4 @@ module.exports = {
     getUserData,
     loginWithPassword,
     signUpWithPassword
-
 };

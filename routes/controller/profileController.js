@@ -16,8 +16,12 @@ createProfile = async (req,res)=>{
     }
     else {
         const {name,company,website,location} = req.body // extracts from request
-        pool.query(`INSERT into profiles (email,name,company,website,location)
-                    values('${req.user.id}','${name}','${company}','${website}','${location}')`, 
+        pool.query(`
+            insert into profiles (email,name,company,website,location)
+            values('${req.user.id}','${name}','${company}','${website}','${location}')
+            ON DUPLICATE KEY UPDATE
+            name = '${name}', company = '${company}', website = '${website}', location = '${location}'
+            `, 
         (err,result)=>{
             err ?  res.status(400).json(err) : 
             result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
@@ -29,16 +33,3 @@ module.exports = {
     getProfileData,
     createProfile
 };
-
-
-/*
-
-IF EXISTS (SELECT * FROM [profiles] WHERE ID = req.user.id)
-UPDATE [profiles] SET 
-    name = '${name}',
-    company = '${company}',
-    website = '${website}'
-    location = '${location}'
-ELSE
-INSERT INTO [profiles] (email,name,company,website,location) values('${req.user.id}','${name}','${company}','${website},'${location}')
- */
