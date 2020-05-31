@@ -13,8 +13,11 @@ const { check, validationResult } = require('express-validator');
 validatorGetProfile = [check('name','screen name is required ').not().isEmpty(),]
 
 
-router.get('/' , authMiddleWare, profileController.getProfileData);
+router.get('/' , authMiddleWare, profileController.getProfileData); // single profile by token
 router.post('/', authMiddleWare, validatorGetProfile,profileController.createProfile)
+
+router.get('/all',profileController.getAllProfiles);
+
 
 
 module.exports = router;
