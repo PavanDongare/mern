@@ -17,7 +17,7 @@ router.get('/' , authMiddleWare, profileController.getProfileData); // single pr
 router.post('/', authMiddleWare, validatorGetProfile,profileController.createProfile)
 
 router.get('/all',profileController.getAllProfiles);
-router.get('/all/:user_id',profileController.getProfileById);
+router.get('/:user_id',profileController.getProfileById);
 
 
 
