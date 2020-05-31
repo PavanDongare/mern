@@ -33,15 +33,24 @@ createProfile = async (req,res)=>{
 
 getAllProfiles=(req,res)=>{
    // return name, avatar
-   pool.query(` SELECT name,avatar FROM profiles`, 
+   pool.query(` SELECT * FROM profiles`, 
         (err,result)=>{
             err ?  res.status(400).json(err) : 
             result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
         })
 }
 
+getProfileById=(req,res)=>{
+    pool.query(` SELECT * FROM profiles where email='${ req.params.user_id}'`, 
+    (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result[0]);
+    })
+}
+
 module.exports = {
     getProfileData,
     createProfile,
-    getAllProfiles
+    getAllProfiles,
+    getProfileById
 };
