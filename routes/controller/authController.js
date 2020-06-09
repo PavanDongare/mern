@@ -61,8 +61,14 @@ signUpWithPassword = async (req,res)=>
 }
 
 
+deleteUser =()=>{
+
+}
+
+
 module.exports = {
     getUserData,
     loginWithPassword,
-    signUpWithPassword
+    signUpWithPassword,
+    deleteUser
 };

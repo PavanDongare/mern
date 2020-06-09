@@ -19,4 +19,25 @@ router.get ('/',authMiddleware,authController.getUserData);
 router.post('/login', loginValidator, authController.loginWithPassword);
 router.post('/signup',signupValidator,authController.signUpWithPassword);
 
+ /*
+ 
+  // api/auth/
+    api/auth/login
+    api/auth/signup
+
+    /path1
+        get
+        post
+        delete
+
+    /path2
+        get 
+        post 
+        put
+
+    '/all',profileController.getAllProfiles);
+     '/:user_id
+ 
+ */
+
 module.exports = router; 
