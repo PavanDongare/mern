@@ -18,7 +18,7 @@ loginValidator = [check('email','Please include the valid email').isEmail(),
 router.get ('/',authMiddleware,authController.getUserData);
 router.post('/login', loginValidator, authController.loginWithPassword);
 router.post('/signup',signupValidator,authController.signUpWithPassword);
-router.delete('/:user_id',authController.deleteUser);
+router.delete('/:user_id',authController.deleteUser); // no token ?
 
  /*
  

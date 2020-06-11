@@ -1,6 +1,8 @@
 const pool = require('../../dbConnection');
 const gravatar = require('gravatar');
 const { validationResult } = require('express-validator');
+const helperFunctions = require('./helperFunctions')
+
 
 
 getProfileData = (req,res) => { 
@@ -11,24 +13,19 @@ getProfileData = (req,res) => {
 })}
 
 createProfile = async (req,res)=>{
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array()});
-    }
-    else {
-        const {name,company,website,location} = req.body // extracts from request
-        const avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'});
+    helperFunctions.backendValidation(req,res);
+    const {name,company,website,location} = req.body // extracts from request
+    const avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'});
+    pool.query(`
+        insert into profiles (email,name,company,website,location,avatar)
+        values('${req.user.id}','${name}','${company}','${website}','${location}','${avatar}')
+        ON DUPLICATE KEY UPDATE
+        name = '${name}', company = '${company}', website = '${website}', location = '${location}',avatar='${avatar}'`, 
+    (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
+    })
 
-        pool.query(`
-            insert into profiles (email,name,company,website,location,avatar)
-            values('${req.user.id}','${name}','${company}','${website}','${location}','${avatar}')
-            ON DUPLICATE KEY UPDATE
-            name = '${name}', company = '${company}', website = '${website}', location = '${location}',avatar='${avatar}'`, 
-        (err,result)=>{
-            err ?  res.status(400).json(err) : 
-            result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
-        })
-    }
 }
 
 getAllProfiles=(req,res)=>{
@@ -48,9 +45,17 @@ getProfileById=(req,res)=>{
     })
 }
 
+addExperience=(req,res)=>{
+
+}
+
+
+
+
 module.exports = {
     getProfileData,
     createProfile,
     getAllProfiles,
-    getProfileById
+    getProfileById,
+    addExperience
 };

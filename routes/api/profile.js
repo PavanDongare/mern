@@ -13,11 +13,20 @@ const { check, validationResult } = require('express-validator');
 validatorGetProfile = [check('name','screen name is required ').not().isEmpty(),]
 
 
+experienceDataValidator = [check('title','Title is Required').not().isEmpty(),
+                           check('company','Company name is Required').not().isEmpty(),
+                           check('date_from','starting date missing').not().isEmpty(),
+                           check('date_to','Ending date missing').not().isEmpty(),
+                           ];
+
+
 router.get('/' , authMiddleWare, profileController.getProfileData); // single profile by token
 router.post('/', authMiddleWare, validatorGetProfile,profileController.createProfile)
 
 router.get('/all',profileController.getAllProfiles);
 router.get('/:user_id',profileController.getProfileById);
+
+router.post('/experience',profileController.addExperience);
 
 
 

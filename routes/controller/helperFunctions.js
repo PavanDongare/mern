@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const { validationResult } = require('express-validator');
 
 sendJwt = (req,res) => {
     const payload = { user: { id : req.body.email } }
@@ -12,6 +13,15 @@ sendJwt = (req,res) => {
              });
 }
 
+
+backendValidation= (req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+}
+
 module.exports = {
-   sendJwt
+   sendJwt,
+   backendValidation
 };

@@ -20,17 +20,21 @@ getUserData= (req,res)=>{
 
 loginWithPassword = async (req,res)=>
 {    
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors});
-    }
+    helperFunctions.backendValidation(req,res);
     try {
         pool.query(`select * from user where email = '${req.body.email}' `,
         async (err,sqlResult)=>{
             console.log(sqlResult);
             err? res.status(400).json(err): null ;
-            const passwordFromTable = sqlResult[0]['password'];
-            const isMatch = await bcrypt.compare(req.body.password,passwordFromTable);
+            const passwordFromTable='';
+            if(sqlResult.length>1)
+                passwordFromTable =  sqlResult[0]['password']; 
+            else {
+                res.status(400).json('user not registered'); 
+                return ;
+            }
+                
+            const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
             isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
         });
     } catch(err){
