@@ -62,7 +62,11 @@ signUpWithPassword = async (req,res)=>
 
 
 deleteUser =()=>{
-
+    pool.query(` delete * FROM users where email='${ req.params.user_id}'`, 
+    (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result[0]);
+    })
 }
 
 

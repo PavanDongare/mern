@@ -81,3 +81,7 @@ FOREIGN KEY (`post_id`) REFERENCES Posts(`post_id`),
 FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 );
 
+
+ALTER TABLE `Profiles` DROP FOREIGN KEY `profiles_ibfk_1`; ALTER TABLE `Profiles` ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
