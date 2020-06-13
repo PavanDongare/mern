@@ -60,12 +60,9 @@ like=(req,res)=>{
                 pool.query(`delete from likes where post_id=${req.params.postId} and profile_id=${profileId}`);
                 res.status(200).json('Unlinked the post');
             }
-                
             helperFunctions.sqlCallBack(err,res,result,'like failed')
         });
     })
-    
-    
 }
 
 
