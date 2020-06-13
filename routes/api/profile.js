@@ -26,7 +26,9 @@ router.post('/', authMiddleWare, validatorGetProfile,profileController.createPro
 router.get('/all',profileController.getAllProfiles);
 router.get('/:user_id',profileController.getProfileById);
 
-router.post('/experience',profileController.addExperience);
+router.post('/experience',authMiddleWare, experienceDataValidator,profileController.addExperience);
+router.delete('/experience/:experience_id',authMiddleWare, profileController.deleteExperience);
+// make request to external server from node
 
 
 

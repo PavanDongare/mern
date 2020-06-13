@@ -32,8 +32,7 @@ loginWithPassword = async (req,res)=>
             else {
                 res.status(400).json('user not registered'); 
                 return ;
-            }
-                
+            }       
             const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
             isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
         });

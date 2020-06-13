@@ -33,7 +33,7 @@ getAllProfiles=(req,res)=>{
    pool.query(` SELECT * FROM profiles`, 
         (err,result)=>{
             err ?  res.status(400).json(err) : 
-            result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
+            result.length==0 ? res.status(400).json('No users found'): res.status(200).json(result);
         })
 }
 
@@ -46,8 +46,37 @@ getProfileById=(req,res)=>{
 }
 
 addExperience=(req,res)=>{
+    helperFunctions.backendValidation(req,res);
+    const {location,title,company,date_to,date_from} = req.body
 
+    sql_query = (date_to && date_from) ? 
+                `Insert into Experience (profile_id,location,title,company,date_to,date_from)
+                SELECT Profiles.profile_id ,'${location}','${title}','${company}','${date_to}','${date_from}'
+                FROM Profiles 
+                WHERE Profiles.email = '${req.user.id}'` 
+                :
+                `Insert into Experience (profile_id,location,title,company)
+                SELECT Profiles.profile_id ,'${location}','${title}','${company}'
+                FROM Profiles 
+                WHERE Profiles.email = '${req.user.id}'`;
+
+    pool.query(sql_query,
+        (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('Experience could not be added'): res.status(200).json(result);
+    })
 }
+
+
+deleteExperience=(req,res)=>{
+    pool.query(`DELETE FROM Experience WHERE Experience.experience_id = ${ req.params.experience_id}`   ,
+        (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('delete failed'): res.status(200).json(result);
+    })
+}
+
+
 
 
 
@@ -57,5 +86,6 @@ module.exports = {
     createProfile,
     getAllProfiles,
     getProfileById,
-    addExperience
+    addExperience,
+    deleteExperience
 };

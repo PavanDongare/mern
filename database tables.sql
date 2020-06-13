@@ -73,6 +73,10 @@ CREATE TABLE Likes(
 `post_id` int(20) NOT NULL,
 `date_created` DATE NOT NULL,
 
+
+ALTER TABLE Posts
+ADD postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
 PRIMARY KEY (`profile_id`, `post_id`), /* only one like for a post from profile, but comments can be many */
 UNIQUE INDEX (`post_id`, `profile_id`), 
 
@@ -82,6 +86,6 @@ FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
 );
 
 
-ALTER TABLE `Profiles` DROP FOREIGN KEY `profiles_ibfk_1`; ALTER TABLE `Profiles` ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+ ALTER TABLE `Profiles` ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
