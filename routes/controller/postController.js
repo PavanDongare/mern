@@ -56,6 +56,11 @@ like=(req,res)=>{
         likeQuery = `insert into likes (post_id,profile_id) values(${req.params.postId},${profileId})`
         pool.query(likeQuery,(err,result)=>
         {
+            if(err){
+                pool.query(`delete from likes where post_id=${req.params.postId} and profile_id=${profileId}`);
+                res.status(200).json('Unlinked the post');
+            }
+                
             helperFunctions.sqlCallBack(err,res,result,'like failed')
         });
     })
@@ -63,23 +68,6 @@ like=(req,res)=>{
     
 }
 
-like1=(req,res)=>{
-    getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' `   
-    var profileId = 0;
-
-    helperFunctions.getDataFromDB(req,getProfileId,function(result){
-        profileId = result[0].profile_id;
-        likePost = `  insert into likes 
-                      where post_id=${req.params.postId} AND
-                      profile_id=${profileId}
-                      `
-        console.log(like);
-        pool.query(likePost,(err,result)=>
-        {
-            helperFunctions.sqlCallBack(err,res,result,'like failed')
-        });
-    })
-}
 
 
 
