@@ -45,6 +45,14 @@ getProfileById=(req,res)=>{
     })
 }
 
+getProfileId=(req,res)=>{
+    pool.query(` SELECT profile_id FROM profiles where email='${ req.params.user_id}'`, 
+    (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result[0]);
+    })
+}
+
 addExperience=(req,res)=>{
     helperFunctions.backendValidation(req,res);
     const {location,title,company,date_to,date_from} = req.body

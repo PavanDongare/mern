@@ -28,9 +28,11 @@ addPost=(req,res)=>{
 
 
 
+
 deletePost=(req,res)=>{
     getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' `   
     var profileId = 0;
+
     helperFunctions.getDataFromDB(req,getProfileId,function(result){
         profileId = result[0].profile_id;
         deletePost = `delete from Posts 
@@ -44,6 +46,41 @@ deletePost=(req,res)=>{
         });
     })
 }
+like=(req,res)=>{
+    getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' `   
+    var profileId = 0;
+
+    helperFunctions.getDataFromDB(req,getProfileId,function(result){
+        profileId = result[0].profile_id;
+        console.log(profileId);
+        likeQuery = `insert into likes (post_id,profile_id) values(${req.params.postId},${profileId})`
+        pool.query(likeQuery,(err,result)=>
+        {
+            helperFunctions.sqlCallBack(err,res,result,'like failed')
+        });
+    })
+    
+    
+}
+
+like1=(req,res)=>{
+    getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' `   
+    var profileId = 0;
+
+    helperFunctions.getDataFromDB(req,getProfileId,function(result){
+        profileId = result[0].profile_id;
+        likePost = `  insert into likes 
+                      where post_id=${req.params.postId} AND
+                      profile_id=${profileId}
+                      `
+        console.log(like);
+        pool.query(likePost,(err,result)=>
+        {
+            helperFunctions.sqlCallBack(err,res,result,'like failed')
+        });
+    })
+}
+
 
 
 
@@ -53,4 +90,5 @@ module.exports = {
     getAllPosts,
     addPost,
     deletePost,
+    like
 };

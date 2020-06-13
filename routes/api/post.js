@@ -14,6 +14,7 @@ const { check, validationResult } = require('express-validator');
 router.get('/',postController.getAllPosts);
 router.post('/',authMiddleWare,postController.addPost);
 router.delete('/:postId',authMiddleWare,postController.deletePost)
+router.post('/:postId',authMiddleWare,postController.like);
 
 
 module.exports = router;
