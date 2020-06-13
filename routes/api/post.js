@@ -16,5 +16,7 @@ router.post('/',authMiddleWare,postController.addPost);
 router.delete('/:postId',authMiddleWare,postController.deletePost)
 router.post('/:postId',authMiddleWare,postController.like);
 
+router.post('/comment/:postId',authMiddleWare,postController.addComment);
+
 
 module.exports = router;

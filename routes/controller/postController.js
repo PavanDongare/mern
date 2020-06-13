@@ -46,6 +46,8 @@ deletePost=(req,res)=>{
         });
     })
 }
+
+
 like=(req,res)=>{
     getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' `   
     var profileId = 0;
@@ -63,6 +65,20 @@ like=(req,res)=>{
     })
 }
 
+addComment=(req,res)=>{
+    console.log(req.body);
+    getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' ` ;
+    var profileId = 0;
+    helperFunctions.getDataFromDB(req,getProfileId,function(result){
+        profileId = result[0].profile_id;
+        addComment = `insert into Comments (post_id,profile_id,content) values(${req.params.postId},${profileId},'${req.body.comment}')`
+        pool.query(addComment,(err,result)=>
+        {
+            helperFunctions.sqlCallBack(err,res,result,'comment not added')
+        });
+    })
+}
+
 
 
 
@@ -73,5 +89,6 @@ module.exports = {
     getAllPosts,
     addPost,
     deletePost,
-    like
+    like,
+    addComment
 };
