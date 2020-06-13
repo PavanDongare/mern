@@ -66,7 +66,6 @@ like=(req,res)=>{
 }
 
 addComment=(req,res)=>{
-    console.log(req.body);
     getProfileId = `SELECT Profiles.profile_id  FROM Profiles  WHERE Profiles.email = '${req.user.id}' ` ;
     var profileId = 0;
     helperFunctions.getDataFromDB(req,getProfileId,function(result){
@@ -77,6 +76,14 @@ addComment=(req,res)=>{
             helperFunctions.sqlCallBack(err,res,result,'comment not added')
         });
     })
+}
+
+deleteComment=(req,res)=>{
+    addComment = `Delete from Comments where comment_id=${req.params.commentId}`
+        pool.query(addComment,(err,result)=>
+        {
+            helperFunctions.sqlCallBack(err,res,result,'comment delete failed');
+        });
 }
 
 
@@ -90,5 +97,6 @@ module.exports = {
     addPost,
     deletePost,
     like,
-    addComment
+    addComment,
+    deleteComment
 };
