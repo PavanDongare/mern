@@ -18,7 +18,6 @@ const App = ()=> (
                 <Route path="/login" component={Login} />
                 </section>
             </Switch>
-
   </Fragment>
   </Router>
  
