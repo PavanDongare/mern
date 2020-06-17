@@ -1,5 +1,6 @@
 import React, {Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
+import {axios} from 'axios'; 
 
 export const Regsiter = () => {
 
@@ -10,11 +11,13 @@ export const Regsiter = () => {
         password2: ''
     });
 
+    // useState returns a staeful value & function to update it
 
     const { name,email,password,password2} = formData;
     
 
     const onChange = e=> setFormData({ ...formData , [e.target.name]: e.target.value });
+   
 
     const onSubmit = e => {
         e.preventDefault();
