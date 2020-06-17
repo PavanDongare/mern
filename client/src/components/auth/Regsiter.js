@@ -9,33 +9,11 @@ export const Regsiter = () => {
         password: '',
         password2: ''
     });
-    /*
-     * why use useState hook?
-     *   1 we can eaisly access formData directly
-     *   2 set using setForm method defined
-     */
+
 
     const { name,email,password,password2} = formData;
     
-    /*
-        setformData
-        param: 1 single object { original obj , data to change in original }
-        original: ...formData // copy or main state
-        data to change: [e.target.name]: e.target.value
-                        [e.target.name] -> gets name of attribute of html element
-                        e.target.value  -> value
 
-        question?
-        why [] syntax ?
-        why : syntax ?
-    */
-
-        /* 
-            value="name" // sets value to 'name' literally
-            value={name} // value of variable name
-            Question? is it two way binding or one way?
-            one way with {} // html to js
-        */
     const onChange = e=> setFormData({ ...formData , [e.target.name]: e.target.value });
 
     const onSubmit = e => {
@@ -105,3 +83,31 @@ export const Regsiter = () => {
 
 
 export default Regsiter;
+
+
+
+{/* 
+        setformData
+        param: 1 single object { original obj , data to change in original }
+        original: ...formData // copy or main state
+        data to change: [e.target.name]: e.target.value
+                        [e.target.name] -> gets name of attribute of html element
+                        e.target.value  -> value
+
+        question?
+        why [] syntax ?
+        why : syntax ?
+
+
+            value="name" // sets value to 'name' literally
+            value={name} // value of variable name
+            Question? is it two way binding or one way?
+            one way with {} // html to js
+
+    
+     * why use useState hook?
+     *   1 we can eaisly access formData directly
+     *   2 set using setForm method defined
+    
+
+*/}
