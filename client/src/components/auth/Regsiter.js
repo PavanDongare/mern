@@ -1,8 +1,11 @@
 import React, {Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import {axios} from 'axios'; 
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
 
-export const Regsiter = () => {
+
+export const Regsiter = (props) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -21,8 +24,11 @@ export const Regsiter = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        if(password !== password2 )
+        if(password !== password2 ){
+            props.setAlert('passwords do not match','danger');
             console.log('passwords do not match');
+        }
+            
         else 
             console.log(formData);   
     }
@@ -85,7 +91,7 @@ export const Regsiter = () => {
 }
 
 
-export default Regsiter;
+export default connect(null,{ setAlert })(Regsiter);
 
 
 
