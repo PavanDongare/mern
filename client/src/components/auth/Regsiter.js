@@ -91,7 +91,7 @@ export const Regsiter = (props) => {
 }
 
 
-export default connect(null,{ setAlert })(Regsiter);
+export default connect(null,{ setAlert })(Regsiter); // this allows to access props.setalert
 
 
 
