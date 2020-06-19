@@ -90,10 +90,11 @@ export const Regsiter = ({setAlert}) => {
         </p>
       </Fragment>
     );
-}
+};
+
 
 Regsiter.propTypes = { 
-    setAlert : PropTypes.func.isRequired 
+    setAlert : PropTypes.func.isRequired  // why ? what ?
 };
 
 
