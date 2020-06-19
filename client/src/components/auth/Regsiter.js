@@ -2,10 +2,12 @@ import React, {Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import {axios} from 'axios'; 
 import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alert';
+import { setAlert } from '../../actions/alertAction';
+import PropTypes from 'prop-types';
 
 
-export const Regsiter = (props) => {
+// (props)   props.setAlert
+export const Regsiter = ({setAlert}) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -25,7 +27,7 @@ export const Regsiter = (props) => {
     const onSubmit = e => {
         e.preventDefault();
         if(password !== password2 ){
-            props.setAlert('passwords do not match','danger');
+            setAlert('passwords do not match','danger');
             console.log('passwords do not match');
         }
             
@@ -89,6 +91,10 @@ export const Regsiter = (props) => {
       </Fragment>
     );
 }
+
+Regsiter.propTypes = { 
+    setAlert : PropTypes.func.isRequired 
+};
 
 
 export default connect(null,{ setAlert })(Regsiter); // this allows to access props.setalert
