@@ -19,7 +19,7 @@ Alert.propTypes = {
     alerts:  PropTypes.array.isRequired
 }
 
-// ?
+// gets state & passes it as prop to component
 const mapStateToProps = state => ({
     alerts: state.alert
 })
