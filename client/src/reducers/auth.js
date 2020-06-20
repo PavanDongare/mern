@@ -44,6 +44,8 @@ export default function(state = initialState,action){
                 user: payload
                 
             }
+        default :
+            return state;
         
     }
 }   
