@@ -1,8 +1,11 @@
 import React, {Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import {axios} from 'axios'; 
+import { loginAction } from '../../actions/authAction';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-export const Login = () => {
+export const Login = ({loginAction}) => {
 
     const [formData, setFormData] = useState({
         email: '',
@@ -19,7 +22,7 @@ export const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-     
+        loginAction({email,password});
         console.log(formData);   
     }
 
@@ -50,7 +53,7 @@ export const Login = () => {
             />
           </div>
            
-          <input type="submit" className="btn btn-primary" value="Register" />
+          <input type="submit" className="btn btn-primary" value="Login" />
         </form>
         <p className="my-1">
           Don't have an account? <Link to="/Register">Sign In</Link>
@@ -60,5 +63,11 @@ export const Login = () => {
 }
 
 
-export default Login;
+// login action is a prop
+Login.prototype = {
+    loginAction : PropTypes.func.isRequired, // since login is  a function
+}
+
+// { map state to prop, action  }
+export default connect(null,{loginAction}) (Login);
 

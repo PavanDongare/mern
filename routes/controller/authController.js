@@ -24,20 +24,22 @@ loginWithPassword = async (req,res)=>
     try {
         pool.query(`select * from user where email = '${req.body.email}' `,
         async (err,sqlResult)=>{
-            console.log(sqlResult);
-            err? res.status(400).json(err): null ;
-            const passwordFromTable='';
-            if(sqlResult.length>1)
-                passwordFromTable =  sqlResult[0]['password']; 
+           
+            if(sqlResult.length>=1){    
+                const passwordFromTable =  sqlResult[0]['password']; 
+                console.log('check              1');
+                const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
+                isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
+                console.log('check              2');
+            } 
             else {
+                console.log('check              3');
                 res.status(400).json('user not registered'); 
                 return ;
             }       
-            const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
-            isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
         });
     } catch(err){
-        console.log(err);
+        console.log(1);
         res.status(500).send('server error');
     }
 }
