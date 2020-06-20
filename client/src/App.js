@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment , useEffect,cleanup } from 'react';
 import './App.css';
 import { Navbar } from './components/layout/Navbar';
 import { Landing } from './components/layout/Landing';
@@ -6,35 +6,43 @@ import  Alert  from './components/layout/Alert';
 import { BrowserRouter as Router , Route , Switch } from 'react-router-dom';
 import Regsiter from './components/auth/Regsiter';
 import Login from './components/auth/Login';
-
-// Redux
-/*
-    Provider connects react & redux
-    store 
-*/
 import { Provider } from 'react-redux';
 import store from './store';
+import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './actions/authAction';
 
-const App = ()=> (
-<Provider store={store}>
-  <Router>
-    <Fragment>
-         <Navbar/> 
-         <Route exact path="/" component={Landing} />
-          <section className="container" >
-              <Alert/>
-              <Switch>          
-                  <Route path="/register" component={Regsiter} />
-                  <Route path="/login" component={Login} />
-              </Switch>
-  
-          </section>   
-    </Fragment>
-  </Router>
-</Provider>
-  
- 
-);
+if(localStorage.token){
+    setAuthToken(localStorage.token);
+}
+
+// component did mount   
+const App = ()=> {
+
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, [])
+
+    return (
+        <Provider store={store}>
+          <Router>
+            <Fragment>
+                 <Navbar/> 
+                 <Route exact path="/" component={Landing} />
+                  <section className="container" >
+                      <Alert/>
+                      <Switch>          
+                          <Route path="/register" component={Regsiter} />
+                          <Route path="/login" component={Login} />
+                      </Switch>
+          
+                  </section>   
+            </Fragment>
+          </Router>
+        </Provider>
+          
+         
+        );
+}  
 /* () when no explicit return statement   */
 
 export default App;

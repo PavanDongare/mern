@@ -59,3 +59,9 @@ export const register = ({name,email,password})=> async dispatch=>{
         });
     }
 }   
+
+
+/*
+    to do
+    update backend to give error response when database not connected
+*/

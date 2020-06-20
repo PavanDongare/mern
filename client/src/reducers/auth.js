@@ -18,7 +18,8 @@ export default function(state = initialState,action){
     const { type, payload } =  action;
     switch(type){
         case REGISTER_SUCCESS :
-            localStorage.setItem('token',payload.toekn);
+            localStorage.setItem('token',payload.token);
+            console.log(localStorage.token,JSON.stringify(payload.token));
             return {
                 ...state,
                 ...payload,
@@ -40,13 +41,12 @@ export default function(state = initialState,action){
                 ...state,
                 isAuthenticated: true,
                 loading: false,
-                isAuthenticated: true,
                 user: payload
                 
             }
         default :
             return state;
         
-    }
+    } 
 }   
 
