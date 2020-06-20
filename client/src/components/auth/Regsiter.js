@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import {axios} from 'axios'; 
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertAction';
+import { register } from '../../actions/authAction';
 import PropTypes from 'prop-types';
 
 
 // (props)   props.setAlert
-export const Regsiter = ({setAlert}) => {
+export const Regsiter = ({setAlert,register}) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -31,7 +32,9 @@ export const Regsiter = ({setAlert}) => {
             console.log('passwords do not match');
         }
             
-        else 
+        else {
+            register({name,email,password});
+        }
             console.log(formData);   
     }
 
@@ -46,7 +49,7 @@ export const Regsiter = ({setAlert}) => {
                    name="name" 
                    value={name}
                    onChange = { e=> onChange(e) }
-                   required />
+                  />
   
         
           </div>
@@ -94,11 +97,12 @@ export const Regsiter = ({setAlert}) => {
 
 
 Regsiter.propTypes = { 
-    setAlert : PropTypes.func.isRequired  // why ? what ?
+    setAlert : PropTypes.func.isRequired , // why ? what ?
+    register: PropTypes.func.isRequired 
 };
 
 
-export default connect(null,{ setAlert })(Regsiter); // this allows to access props.setalert
+export default connect(null,{ setAlert,register })(Regsiter); // this allows to access props.setalert
 
 
 
