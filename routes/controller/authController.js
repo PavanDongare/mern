@@ -11,9 +11,9 @@ getUserData= (req,res)=>{
            if(err)
            res.status(400).json(err);
            else{
-           let userData = result[0];
-           delete userData['password'];
-           res.status(200).json(userData);
+                let userData = result[0];
+                delete userData['password'];
+                res.status(200).json(userData);
            } 
        });
     } 

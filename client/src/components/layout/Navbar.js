@@ -17,7 +17,11 @@ const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
   );
   const userLinks =(
     <ul>
-        <li> <Link to="/logout" onClick={logout}>Logout</Link>        </li>
+        <li> <Link to="/logout" onClick={logout}>
+                <i className="fas fa-sign-out-alt"> </i>{" "} 
+                <span className="hide-sm" > Logout </span>
+            </Link>        
+        </li>
     </ul>
   );
   return (
@@ -27,7 +31,7 @@ const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
             <i className="fas fa-code"></i> DevConnector
           </Link>
         </h1>
-  {!loading && (<Fragment>{ isAuthenticated ? userLinks : guestLinks }</Fragment>)}
+      {!loading && (<Fragment>{ isAuthenticated ? userLinks : guestLinks }</Fragment>)}
       </nav>
   );
 };
