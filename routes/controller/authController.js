@@ -27,19 +27,15 @@ loginWithPassword = async (req,res)=>
            
             if(sqlResult.length>=1){    
                 const passwordFromTable =  sqlResult[0]['password']; 
-                console.log('check              1');
                 const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
                 isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
-                console.log('check              2');
             } 
             else {
-                console.log('check              3');
                 res.status(400).json('user not registered'); 
                 return ;
             }       
         });
     } catch(err){
-        console.log(1);
         res.status(500).send('server error');
     }
 }
