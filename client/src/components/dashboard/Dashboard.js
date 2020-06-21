@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getCurrentProfile } from '../../actions/profile'
 import { profile_url } from 'gravatar'
 import Spinner from '../layout/spinner';
+import { Link } from 'react-router-dom'
 
 
 const Dashboard = ({getCurrentProfile,
@@ -19,7 +20,11 @@ const Dashboard = ({getCurrentProfile,
         <p className="lead">
         <i className="fas fa-user"></i> Welcome {user && user.name} </p>  
         {/* && synatax is used as if(condition) return x */}
-        {profile!== null ? <Fragment>has a </Fragment> : <Fragment>does not have</Fragment>}
+        {profile!== null ? <Fragment>has a </Fragment> : 
+        <Fragment>
+           <p> Please update the profile </p> 
+           <Link to ='/create-profile' className='btn btn-primary my-1'> Create Profile </Link>
+        </Fragment>}
     </Fragment>
 }
 
