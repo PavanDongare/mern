@@ -17,7 +17,7 @@ const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
   );
   const userLinks =(
     <ul>
-        <li> <Link to="/logout">Logout</Link>        </li>
+        <li> <Link to="/logout" onClick={logout}>Logout</Link>        </li>
     </ul>
   );
   return (

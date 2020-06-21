@@ -31,12 +31,11 @@ loginWithPassword = async (req,res)=>
                 isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
             } 
             else {
-                res.status(400).json('user not registered'); 
-                return ;
+                throw err;
             }       
         });
     } catch(err){
-        res.status(500).send('server error');
+        res.status(500).send('User Not found');
     }
 }
 
