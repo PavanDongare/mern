@@ -82,5 +82,6 @@ const mapStaeToProps = state => ({
 
 // { map state to prop, action  }
 // map state to props, picks data from state & attaches it to state
+// providing login action attaches action to props to consume by component
 export default connect( mapStaeToProps ,{loginAction}) (Login);
 
