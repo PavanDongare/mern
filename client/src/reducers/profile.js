@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { GET_PROFILE, PROFILE_ERROR } from '../actions/types';
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, LOGOUT } from '../actions/types';
 
 
  const initialState = {
@@ -25,6 +25,16 @@ export default function(state = initialState, action){
                 ...state,
                 error: payload,
                 loading: false,
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                profile: null,
+            }
+        case CLEAR_PROFILE:
+            return{
+                ...state,
+                profile: null,
             }
         default:
              return state;

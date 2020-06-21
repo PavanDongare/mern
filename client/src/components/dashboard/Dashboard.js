@@ -19,6 +19,7 @@ const Dashboard = ({getCurrentProfile,
         <p className="lead">
         <i className="fas fa-user"></i> Welcome {user && user.name} </p>  
         {/* && synatax is used as if(condition) return x */}
+        {profile!== null ? <Fragment>has a </Fragment> : <Fragment>does not have</Fragment>}
     </Fragment>
 }
 
