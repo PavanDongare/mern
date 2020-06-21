@@ -1,5 +1,5 @@
 import React, {Fragment, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {axios} from 'axios'; 
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertAction';
@@ -7,8 +7,9 @@ import { register } from '../../actions/authAction';
 import PropTypes from 'prop-types';
 
 
+
 // (props)   props.setAlert
-export const Regsiter = ({setAlert,register}) => {
+export const Regsiter = ({setAlert,register,isAuthenticated}) => {
 
     const [formData, setFormData] = useState({
         name: '',
@@ -36,6 +37,12 @@ export const Regsiter = ({setAlert,register}) => {
             register({name,email,password});
         }
             console.log(formData);   
+    }
+
+
+    // redirect if logged in
+    if(isAuthenticated){
+        return <Redirect to='/dashboard'/>;
     }
 
     return (
@@ -101,8 +108,11 @@ Regsiter.propTypes = {
     register: PropTypes.func.isRequired 
 };
 
+const mapStaeToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
 
-export default connect(null,{ setAlert,register })(Regsiter); // this allows to access props.setalert
+export default connect(mapStaeToProps,{ setAlert,register })(Regsiter);
 
 
 
