@@ -50,6 +50,7 @@ export default function(state = initialState,action){
                 
             }
         case LOGOUT:
+            localStorage.removeItem('token');
             return {
                 ...state,
                 isAuthenticated: false,

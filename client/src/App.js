@@ -15,6 +15,7 @@ import Login from './components/auth/Login';
 import  Alert  from './components/layout/Alert';
 import  Navbar  from './components/layout/Navbar'; 
 import  Dashboard     from './components/dashboard/Dashboard';
+import  PrivateRoute   from './components/routing/PrivateRoute';
 // prefer default import, named import on navbar gives an error
 /*
   mistake: 2 exports were named same, default & named
@@ -44,7 +45,7 @@ const App = ()=> {
                       <Switch>          
                           <Route path="/register" component={Regsiter} />
                           <Route path="/login" component={Login} />
-                          <Route path="/dashboard" component={Dashboard}/>
+                          <PrivateRoute path="/dashboard" component={Dashboard}/>
                       </Switch>
           
                   </section>   
