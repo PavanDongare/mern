@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 export const Landing = ({isAuthenticated}) => {
+    console.log(isAuthenticated,'check if loggedin');
     if(isAuthenticated){
-        console.log(isAuthenticated,'check if loggedin');
       return  <Redirect to='/dashboard' />;
     }
     return (
@@ -36,4 +36,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps) (Landing);
-

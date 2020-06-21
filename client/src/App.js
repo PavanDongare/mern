@@ -1,7 +1,7 @@
 import React, { Fragment , useEffect,cleanup } from 'react';
 import './App.css';
 
-import { Landing } from './components/layout/Landing';
+
 
 import { BrowserRouter as Router , Route , Switch } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ import  Alert  from './components/layout/Alert';
 import  Navbar  from './components/layout/Navbar'; 
 import  Dashboard     from './components/dashboard/Dashboard';
 import  PrivateRoute   from './components/routing/PrivateRoute';
+import  Landing  from './components/layout/Landing';
 // prefer default import, named import on navbar gives an error
 /*
   mistake: 2 exports were named same, default & named
