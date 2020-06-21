@@ -1,7 +1,14 @@
 import React from "react";
 import {Link} from 'react-router-dom';  // why 'Link' doesn't work?
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {logout} from '../../actions/authAction'
 
-export const Navbar = () => {
+
+export const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
+
+ const authLinks = ();
+
   return (
       <nav className="navbar bg-dark">
         <h1>
@@ -18,4 +25,18 @@ export const Navbar = () => {
   );
 };
  
-export default Navbar
+
+Navbar.propTypes = {
+    logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => (
+    {
+        auth: state.auth
+    }
+)
+
+// connects state,action functions
+export default connect(mapStateToProps,{logout})(Navbar)

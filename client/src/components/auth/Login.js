@@ -74,7 +74,7 @@ Login.prototype = {
 }
 
 
-// listen to state & react
+// listen to store state & react
 const mapStaeToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 })
