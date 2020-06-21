@@ -1,15 +1,25 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {Link} from 'react-router-dom';  // why 'Link' doesn't work?
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout} from '../../actions/authAction'
 import auth from "../../reducers/auth";
+/* #! is link nowhere */
 
+const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
 
-export const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
-
-    console.log(auth);
-
+  const guestLinks=(
+    <ul>
+       <li> <Link to="#!">Developers</Link>         </li> 
+       <li> <Link to="/register">Register</Link>  </li>
+       <li> <Link to="/login">Login</Link>        </li>
+    </ul>
+  );
+  const userLinks =(
+    <ul>
+        <li> <Link to="/logout">Logout</Link>        </li>
+    </ul>
+  );
   return (
       <nav className="navbar bg-dark">
         <h1>
@@ -17,11 +27,7 @@ export const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
             <i className="fas fa-code"></i> DevConnector
           </Link>
         </h1>
-        <ul>
-          <li> <Link to="">Developers</Link></li>
-          <li> <Link to="/register">Register</Link>  </li>
-          <li> <Link to="/login">Login</Link>        </li>
-        </ul>
+  {!loading && (<Fragment>{ isAuthenticated ? userLinks : guestLinks }</Fragment>)}
       </nav>
   );
 };
@@ -33,11 +39,9 @@ Navbar.propTypes = {
 }
 
 
-const mapStateToProps = state => (
-    {
+const mapStateToProps = state => ({
         auth: state.auth
-    }
-)
+})
 
 // connects state,action functions
 export default connect(mapStateToProps,{logout})(Navbar)
