@@ -1,6 +1,5 @@
 import React, {Fragment, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom';
-import {axios} from 'axios'; 
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alertAction';
 import { register } from '../../actions/authAction';
@@ -104,8 +103,10 @@ export const Regsiter = ({setAlert,register,isAuthenticated}) => {
 
 
 Regsiter.propTypes = { 
-    setAlert : PropTypes.func.isRequired , // why ? what ?
-    register: PropTypes.func.isRequired 
+    // is it really isRequired ?
+    setAlert : PropTypes.func.isRequired , 
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 };
 
 const mapStaeToProps = state => ({
