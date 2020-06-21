@@ -1,8 +1,10 @@
 import React, { Fragment , useEffect,cleanup } from 'react';
 import './App.css';
-import { Navbar } from './components/layout/Navbar';
+
 import { Landing } from './components/layout/Landing';
 import  Alert  from './components/layout/Alert';
+import  Navbar  from './components/layout/Navbar'; 
+// prefer default import, named import on navbar gives an error
 import { BrowserRouter as Router , Route , Switch } from 'react-router-dom';
 import Regsiter from './components/auth/Regsiter';
 import Login from './components/auth/Login';

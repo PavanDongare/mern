@@ -3,11 +3,12 @@ import {Link} from 'react-router-dom';  // why 'Link' doesn't work?
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {logout} from '../../actions/authAction'
+import auth from "../../reducers/auth";
 
 
 export const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
 
- const authLinks = ();
+    console.log(auth);
 
   return (
       <nav className="navbar bg-dark">
