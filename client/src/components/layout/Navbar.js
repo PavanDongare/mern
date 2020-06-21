@@ -17,11 +17,12 @@ const Navbar = ({auth:{isAuthenticated,loading}, logout}) => {
   );
   const userLinks =(
     <ul>
-        <li> <Link to="/logout" onClick={logout}>
+        <li><Link to="/logout" onClick={logout}>
                 <i className="fas fa-sign-out-alt"> </i>{" "} 
                 <span className="hide-sm" > Logout </span>
             </Link>        
         </li>
+        <li> <Link to="/dashboard">Dashboard</Link>        </li>
     </ul>
   );
   return (
