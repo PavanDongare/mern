@@ -14,13 +14,13 @@ getProfileData = (req,res) => {
 
 createProfile = async (req,res)=>{
     helperFunctions.backendValidation(req,res);
-    const {name,company,website,location} = req.body // extracts from request
+    console.log(req.body);
     const avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'});
     pool.query(`
-        insert into profiles (email,name,company,website,location,avatar)
-        values('${req.user.id}','${name}','${company}','${website}','${location}','${avatar}')
+        insert into profiles (email,data)
+        values('${req.user.id}','${JSON.stringify(req.body)}')
         ON DUPLICATE KEY UPDATE
-        name = '${name}', company = '${company}', website = '${website}', location = '${location}',avatar='${avatar}'`, 
+        data = '${JSON.stringify(req.body)}'`, 
     (err,result)=>{
         err ?  res.status(400).json(err) : 
         result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
