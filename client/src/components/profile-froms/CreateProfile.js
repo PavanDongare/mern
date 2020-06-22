@@ -15,6 +15,8 @@ const CreateProfile = props => {
         avatar:''
     })
 
+    const [displaySocialInputs, toggleSocialDisplay]=useState(false);
+
     // destructure
     const  {
         email,
@@ -94,13 +96,15 @@ const CreateProfile = props => {
         </div>
 
         <div className="my-2">
-          <button type="button" className="btn btn-light">
+          <button onClick={()=>{ toggleSocialDisplay(!displaySocialInputs) }} type="button" className="btn btn-light">
             Add Social Network Links
           </button>
           <span>Optional</span>
         </div>
 
-        <div className="form-group social-input">
+        {displaySocialInputs && 
+        <Fragment>   
+            <div className="form-group social-input">
           <i className="fab fa-twitter fa-2x"></i>
           <input type="text" placeholder="Twitter URL" name="twitter" />
         </div>
@@ -126,6 +130,7 @@ const CreateProfile = props => {
         </div>
         <input type="submit" className="btn btn-primary my-1" />
         <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+        </Fragment>}         
       </form>
        </Fragment> 
     );
