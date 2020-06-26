@@ -157,4 +157,4 @@ CreateProfile.propTypes = {
 
 }
 
-export default CreateProfile;
+export default CreateProfile
