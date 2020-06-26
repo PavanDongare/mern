@@ -3,6 +3,8 @@ import React,{useState, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { createProfileAction } from '../../actions/profile'
+
 
 const CreateProfile = props => {
 
@@ -41,6 +43,9 @@ const CreateProfile = props => {
 
     const onChange = e => {
         setFormData({...formData,[e.target.name] : e.target.value});
+    }
+    const onSubmit = ()=> {
+
     }
 
     return (

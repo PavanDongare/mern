@@ -32,9 +32,22 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
       }
 
       const res = await axios.post('/api/profile',formData,config);
+      dispatch({ type:GET_PROFILE, payload: res.data})
+
+      if(!edit){
+          history.push('/dashboard');
+      }
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+
    }
    catch(error){
-
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: error , status: error.response.status }
+        });
    }
 }
 
