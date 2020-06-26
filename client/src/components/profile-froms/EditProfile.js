@@ -7,7 +7,7 @@ import { createProfileAction, getCurrentProfile } from '../../actions/profile'
 import { withRouter } from 'react-router-dom'
 
 
-const EditProfile = ({createProfileAction , history}) => {
+const EditProfile = ({ profile:{profile,loading} ,createProfileAction,getCurrentProfile , history}) => {
 
 
     const [formData, setFormData]= useState({
@@ -166,9 +166,14 @@ const EditProfile = ({createProfileAction , history}) => {
 
 CreateProfile.propTypes = {
     createProfileAction : PropTypes.func.isRequired,
+    getCurrentProfile : PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
+}
+
+const mapPropToState = {
+    profile: state.profile,
 }
 
 
-
-export default connect(null,{createProfileAction}) ( withRouter(EditProfile)); 
+export default connect(mapPropToState,{createProfileAction,getCurrentProfile}) ( withRouter(EditProfile)); 
  {/* withRouter: access to history, use in action */}
