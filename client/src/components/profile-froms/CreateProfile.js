@@ -162,4 +162,8 @@ CreateProfile.propTypes = {
 
 }
 
-export default CreateProfile;
+const maprStateToProp = {
+
+}
+
+export default connect(maprStateToProp,{createProfileAction}) (CreateProfile);
