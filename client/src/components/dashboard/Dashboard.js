@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import { getCurrentProfile } from '../../actions/profile'
 import { profile_url } from 'gravatar'
 import Spinner from '../layout/spinner';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { DashboradActions } from './DashboradActions';
+
 
 
 const Dashboard = ({getCurrentProfile,
@@ -26,6 +28,7 @@ const Dashboard = ({getCurrentProfile,
                     <Fragment> Create Profile </Fragment> } 
             </Link>
         </Fragment>
+        <DashboradActions></DashboradActions>
     </Fragment>
 }
 
