@@ -155,9 +155,10 @@ const CreateProfile = ({createProfileAction , history}) => {
           <i className="fab fa-instagram fa-2x"></i>
           <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={(e)=>onChange(e)} />
         </div>
+        </Fragment>} 
         <input type="submit" className="btn btn-primary my-1" />
         <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
-        </Fragment>}         
+                
       </form>
        </Fragment> 
     );

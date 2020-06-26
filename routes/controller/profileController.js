@@ -13,7 +13,9 @@ getProfileData = (req,res) => {
 })}
 
 createProfile = async (req,res)=>{
-    helperFunctions.backendValidation(req,res);
+    dataValidation = helperFunctions.backendValidation(req,res);
+    if(!dataValidation)
+       return ;
     console.log(req.body);
     const avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'});
     pool.query(`

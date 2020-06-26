@@ -14,12 +14,13 @@ sendJwt = (req,res) => {
              });
 }
 
-
-backendValidation= (req,res)=>{
+backendValidation = (req,res)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.status(400).json({errors: errors.array()});
+        res.status(400).json({errors: errors.array()});
+        return false;
     }
+    return true;
 }
 
 sqlCallBack = (err,res,result,msg)=>{  // when sql callback is giving backend response

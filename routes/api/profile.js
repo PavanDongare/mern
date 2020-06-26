@@ -10,7 +10,8 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 
 
-validatorGetProfile = [check('name','screen name is required ').not().isEmpty(),]
+validatorGetProfile = [check('name','screen name is required ').not().isEmpty(),
+                       check('title','Title is Required').not().isEmpty(),]
 
 
 experienceDataValidator = [check('title','Title is Required').not().isEmpty(),

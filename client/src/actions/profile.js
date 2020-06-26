@@ -42,12 +42,18 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
         payload: res.data
       });
 
+      dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
+
    }
    catch(error){
+        console.log(setAlert);
+        setAlert(error,'danger');
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: error , status: error.response.status }
         });
+
+        
    }
 }
 
