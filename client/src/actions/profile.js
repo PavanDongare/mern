@@ -23,4 +23,18 @@ export const getCurrentProfile=()=> async dispatch => {
     }
 }
 
+export const createProfileAction=(formData,history,edit=false)=> async dispatch => {
+   try{
+      const config = {
+          headers: {
+              'Content-Type':'application/json'
+          }
+      }
+
+      const res = await axios.post('/api/profile',formData,config);
+   }
+   catch(error){
+
+   }
+}
 
