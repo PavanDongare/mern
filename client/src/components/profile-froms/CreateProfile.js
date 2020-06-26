@@ -4,9 +4,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { createProfileAction } from '../../actions/profile'
+import { withRouter } from 'react-router-dom'
 
 
-const CreateProfile = props => {
+const CreateProfile = ({createProfileAction , history}) => {
+
+    onSubmit = e => {
+        e.preventDefault();
+        createProfileAction(formData,history);
+    }
 
     const [formData, setFormData]= useState({
         company:'',
@@ -159,11 +165,10 @@ const CreateProfile = props => {
 }
 
 CreateProfile.propTypes = {
-
+    createProfileAction : PropTypes.func.isRequired,
 }
 
-const maprStateToProp = {
 
-}
 
-export default connect(maprStateToProp,{createProfileAction}) (CreateProfile);
+export default connect(null,{createProfileAction}) ( withRouter(CreateProfile)); 
+ {/* withRouter: access to history, use in action */}
