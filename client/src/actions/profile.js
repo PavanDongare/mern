@@ -46,8 +46,9 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
 
    }
    catch(error){
-        console.log(setAlert);
-        setAlert(error,'danger');
+        const errors = error.response.data.errors;
+        errors && errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: error , status: error.response.status }
