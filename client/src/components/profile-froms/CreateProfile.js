@@ -9,10 +9,6 @@ import { withRouter } from 'react-router-dom'
 
 const CreateProfile = ({createProfileAction , history}) => {
 
-    onSubmit = e => {
-        e.preventDefault();
-        createProfileAction(formData,history);
-    }
 
     const [formData, setFormData]= useState({
         company:'',
@@ -50,9 +46,12 @@ const CreateProfile = ({createProfileAction , history}) => {
     const onChange = e => {
         setFormData({...formData,[e.target.name] : e.target.value});
     }
-    const onSubmit = ()=> {
-
+    const  onSubmit = e => {
+        e.preventDefault();
+        createProfileAction(formData,history);
     }
+
+   
 
     return (
        <Fragment>
@@ -64,7 +63,7 @@ const CreateProfile = ({createProfileAction , history}) => {
         profile stand out
       </p>
       <small>*  required field</small>
-      <form className="form">
+      <form className="form"  onSubmit={e=>onSubmit(e)}>
         <div className="form-group">
           <select name="status" value={status} onChange={(e)=>onChange(e)} >
             <option value="0">* Select Professional Status</option>
