@@ -21,14 +21,17 @@ const Dashboard = ({getCurrentProfile,
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
         <i className="fas fa-user"></i> Welcome {user && user.name} </p>  
-        <Fragment>
-           <Link to ='/create-profile' className='btn btn-primary my-1'> 
-                {profile!== null ? 
-                    <Fragment> Update Profile with create form</Fragment> : 
-                    <Fragment> Create Profile </Fragment> } 
-            </Link>
-        </Fragment>
-        <DashboradActions></DashboradActions>
+
+
+        { profile!== null ?
+            <DashboradActions></DashboradActions> :
+            <Fragment>
+                <Link to ='/create-profile' className='btn btn-primary my-1'> 
+                    <Fragment> Create Profile </Fragment> 
+                </Link>
+            </Fragment> 
+
+        }
     </Fragment>
 }
 
