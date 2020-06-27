@@ -14,12 +14,14 @@ validatorGetProfile = [check('bio','short bio is required ').not().isEmpty(),
                        ]
 
 
-experienceDataValidator = [check('title','Title is Required').not().isEmpty(),
-                           check('company','Company name is Required').not().isEmpty(),
-                           check('date_from','starting date missing').not().isEmpty(),
-                           check('date_to','Ending date missing').not().isEmpty(),
-                           ];
 
+     // disabled validation for UI testing                      
+// experienceDataValidator = [check('title','Title is Required').not().isEmpty(),
+//                            check('company','Company name is Required').not().isEmpty(),
+//                            check('date_from','starting date missing').not().isEmpty(),
+//                            check('date_to','Ending date missing').not().isEmpty(),
+//                            ];
+experienceDataValidator=[];
 
 router.get('/' , authMiddleWare, profileController.getProfileData); // single profile by token
 router.post('/', authMiddleWare, validatorGetProfile,profileController.createProfile)
