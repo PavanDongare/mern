@@ -9,7 +9,15 @@ getProfileData = (req,res) => {
    pool.query(`SELECT * FROM profiles WHERE email  = '${req.user.id}' LIMIT 1 `, 
        (err,result)=>{
            err ?  res.status(400).json(err) : 
-           result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);
+           result.length==0 && res.status(400).json('user not found');
+           let profileData  = convert(); 
+           let userData = { 
+                            "profile_id" : result[0].profile_id, 
+                            "email": result[0].email };
+                            console.log(result[0]);
+           
+           res.status(200).json(userData);
+
 })}
 
 createProfile = async (req,res)=>{
@@ -19,10 +27,10 @@ createProfile = async (req,res)=>{
     console.log(req.body);
     const avatar = gravatar.url(req.body.email,{s:200,r:'pg',d:'mm'});
     pool.query(`
-        insert into profiles (email,data)
+        insert into profiles (email,profileData)
         values('${req.user.id}','${JSON.stringify(req.body)}')
         ON DUPLICATE KEY UPDATE
-        data = '${JSON.stringify(req.body)}'`, 
+        profileData = '${JSON.stringify(req.body)}'  `, 
     (err,result)=>{
         err ?  res.status(400).json(err) : 
         result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result);

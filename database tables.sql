@@ -89,3 +89,5 @@ FOREIGN KEY (`profile_id`) REFERENCES Profiles(`profile_id`)
  ALTER TABLE `Profiles` ADD CONSTRAINT `profiles_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
+ALTER TABLE Profiles
+ADD profileData JSON DEFAULT NULL;

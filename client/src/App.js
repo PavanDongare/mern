@@ -18,6 +18,8 @@ import  Dashboard     from './components/dashboard/Dashboard';
 import  PrivateRoute   from './components/routing/PrivateRoute';
 import  Landing  from './components/layout/Landing';
 import CreateProfile from './components/profile-froms/CreateProfile';
+import EditProfile from './components/profile-froms/EditProfile';
+
 // prefer default import, named import on navbar gives an error
 /*
   mistake: 2 exports were named same, default & named
@@ -49,6 +51,7 @@ const App = ()=> {
                           <Route path="/login" component={Login} />
                           <PrivateRoute path="/dashboard" component={Dashboard}/>
                           <PrivateRoute path="/create-profile" component={CreateProfile}/>
+                          <PrivateRoute path="/edit-profile" component={EditProfile}/>
                       </Switch>
           
                   </section>   

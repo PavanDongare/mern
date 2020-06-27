@@ -1,5 +1,5 @@
 // racfp
-import React,{useState, Fragment} from 'react'
+import React,{useState, useEffect, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -7,8 +7,9 @@ import { createProfileAction, getCurrentProfile } from '../../actions/profile'
 import { withRouter } from 'react-router-dom'
 
 
-const EditProfile = ({ profile:{profile,loading} ,createProfileAction,getCurrentProfile , history}) => {
+const EditProfile = ({ profile:{profile,loading } ,createProfileAction,getCurrentProfile , history}) => {
 
+  
 
     const [formData, setFormData]= useState({
         company:'',
@@ -42,6 +43,18 @@ const EditProfile = ({ profile:{profile,loading} ,createProfileAction,getCurrent
         youtube,
         instagram, 
     } = formData;
+
+    useEffect(() => {
+           
+            getCurrentProfile();
+            console.log(profile);
+            const profileData = {...formData};
+            for (const key in profile){
+                if(key in profileData)
+                    profileData[key]=profile[key];
+            }
+
+    }, [loading]);
 
     const onChange = e => {
         setFormData({...formData,[e.target.name] : e.target.value});
@@ -164,16 +177,17 @@ const EditProfile = ({ profile:{profile,loading} ,createProfileAction,getCurrent
     );
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     createProfileAction : PropTypes.func.isRequired,
     getCurrentProfile : PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 }
 
-const mapPropToState = {
-    profile: state.profile,
-}
+
+const mapStateToProps = state => ({
+    profile : state.profile,
+})
 
 
-export default connect(mapPropToState,{createProfileAction,getCurrentProfile}) ( withRouter(EditProfile)); 
+export default connect(mapStateToProps,{createProfileAction,getCurrentProfile}) ( withRouter(EditProfile)); 
  {/* withRouter: access to history, use in action */}
