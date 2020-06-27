@@ -3,7 +3,8 @@ import { setAlert } from './alertAction';
 
 import {
     GET_PROFILE,
-    PROFILE_ERROR
+    PROFILE_ERROR,
+    UPDATE_PROFILE
 } from './types'; 
 
 // get current users profile
@@ -37,10 +38,6 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
       if(!edit){
           history.push('/dashboard');
       }
-      dispatch({
-        type: GET_PROFILE,
-        payload: res.data
-      });
 
       dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
 
@@ -53,8 +50,33 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
             type: PROFILE_ERROR,
             payload: { msg: error , status: error.response.status }
         });
-
-        
    }
 }
+
+
+// add experience
+export const addExperience= (formData, history)=> async dispatch => {
+    try{
+        const config = {
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+        const res = await axios.post('/api/profile/experience',formData,config);
+        dispatch({ type: UPDATE_PROFILE, payload: res.data});
+        dispatch(setAlert('experience added', 'success'));
+        history.push('/dashboard');
+     }
+     catch(error){
+          const errors = error.response.data.errors;
+          errors && errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+          
+          dispatch({
+              type: PROFILE_ERROR,
+              payload: { msg: error , status: error.response.status }
+          });
+     }
+}
+
+
 
