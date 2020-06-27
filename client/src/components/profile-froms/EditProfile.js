@@ -50,9 +50,12 @@ const EditProfile = ({ profile:{profile,loading } ,createProfileAction,getCurren
             console.log(profile);
             const profileData = {...formData};
             for (const key in profile){
-                if(key in profileData)
+                if(key in profileData){
                     profileData[key]=profile[key];
+                    console.log(profileData[key],'pfd');
+                }     
             }
+            setFormData(profileData);
 
     }, [loading]);
 
