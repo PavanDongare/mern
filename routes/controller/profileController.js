@@ -10,11 +10,11 @@ getProfileData = (req,res) => {
        (err,result)=>{
            err ?  res.status(400).json(err) : 
            result.length==0 && res.status(400).json('user not found');
-           let profileData  = convert(); 
+           let profileData  = JSON.parse(result[0].profileData); 
            let userData = { 
                             "profile_id" : result[0].profile_id, 
-                            "email": result[0].email };
-                            console.log(result[0]);
+                            "email": result[0].email,
+                            ...profileData };
            
            res.status(200).json(userData);
 
