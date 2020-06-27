@@ -72,7 +72,9 @@ const AddExperience = (props) => {
           <div class="form-group">
             <h4>To Date</h4>
             <input type="date" name="to" 
-            value={to} onChange={e=> onChange(e)}/>
+            value={to} onChange={e=> onChange(e)}
+            disabled={toDateDisabled?'disabled':''}
+            />
           </div>
           <div class="form-group">
             <textarea
