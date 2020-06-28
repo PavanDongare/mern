@@ -5,7 +5,9 @@ import {
     GET_PROFILE,
     PROFILE_ERROR,
     UPDATE_PROFILE,
-    DELETE_ACCOUNT
+    DELETE_ACCOUNT,
+    GET_ALLPROFILES,
+    CLEAR_PROFILE
 } from './types'; 
 
 // get current users profile
@@ -97,6 +99,43 @@ export const deleteAccount = () => async dispatch => {
             })
         }
     }
+}
+
+
+export const getAllProfiles = () => async dispatch => {
+    dispatch({type:CLEAR_PROFILE});
+    try {
+        const res = await axios.get(`/api/profile/all`);
+        dispatch({
+            type: GET_ALLPROFILES,
+            payload: res.data,
+        })
+    }
+    catch(error){
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: null,
+        })
+    }
+    
+}
+
+export const getProfileById = (userId ) => async dispatch => {
+    dispatch({type:CLEAR_PROFILE});
+    try {
+        const res = await axios.get(`/api/profile/${userId}`);
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data,
+        })
+    }
+    catch(error){
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: error,
+        })
+    }
+    
 }
 
 

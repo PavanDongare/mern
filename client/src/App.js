@@ -20,6 +20,7 @@ import  Landing  from './components/layout/Landing';
 import CreateProfile from './components/profile-froms/CreateProfile';
 import EditProfile from './components/profile-froms/EditProfile';
 import  AddExperience  from './components/profile-froms/AddExperience';
+import  Profiles  from './components/profiles/Profiles';
 
 // prefer default import, named import on navbar gives an error
 /*
@@ -50,10 +51,12 @@ const App = ()=> {
                       <Switch>          
                           <Route path="/register" component={Regsiter} />
                           <Route path="/login" component={Login} />
+                          <Route path="/profiles" component={Profiles}/>
                           <PrivateRoute path="/dashboard" component={Dashboard}/>
                           <PrivateRoute path="/create-profile" component={CreateProfile}/>
                           <PrivateRoute path="/edit-profile" component={EditProfile}/>
                           <PrivateRoute path="/add-experience" component={AddExperience}/>
+                            
                       </Switch>
           
                   </section>   
