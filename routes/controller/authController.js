@@ -2,7 +2,7 @@ const pool = require('../../dbConnection');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
-
+const helperFunctions = require('./helperFunctions')
 
 getUserData= (req,res)=>{ 
     pool.query(`select * from user where email = '${req.user.id}'`, 
@@ -81,5 +81,6 @@ module.exports = {
     getUserData,
     loginWithPassword,
     signUpWithPassword,
-    deleteUser
+    deleteUser,
+    deleteUserByToken
 };
