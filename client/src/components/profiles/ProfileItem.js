@@ -46,7 +46,13 @@ const ProfileItem = ({profile :{
             <img  className="round-img"/>
             <div>
                 <h2>{email}</h2>
-                <h2>{company}</h2>
+                <p>{status} at {company} </p>
+                <p> {location}</p>
+                <Link to={`/profile/${profile_id}`}
+                    className='btn btn-primary'
+                >
+                    View Profile
+                </Link>
             </div>
         </div>
     )
