@@ -7,6 +7,7 @@ import { profile_url } from 'gravatar'
 import Spinner from '../layout/spinner';
 import { Link } from 'react-router-dom';
 import { DashboradActions } from './DashboradActions';
+import  Experience  from './Experience';
 
 
 
@@ -23,8 +24,13 @@ const Dashboard = ({getCurrentProfile,
         <i className="fas fa-user"></i> Welcome {user && user.name} </p>  
 
 
-        { profile!== null ?
-            <DashboradActions></DashboradActions> :
+        { profile!== null ? (
+            <Fragment>
+                <DashboradActions></DashboradActions>
+                <Experience experience={ [{ '_id':'1', 'title':'test1','location':'test1'}] }  ></Experience>
+            </Fragment> 
+        )
+             :
             <Fragment>
                 <Link to ='/create-profile' className='btn btn-primary my-1'> 
                     <Fragment> Create Profile </Fragment> 

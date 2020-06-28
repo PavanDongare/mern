@@ -19,7 +19,7 @@ export const getCurrentProfile=()=> async dispatch => {
     } catch (error){
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error , status: error.response.status }
+            payload: { msg: error , status: error.response }
         })
     }
 }
@@ -48,7 +48,7 @@ export const createProfileAction=(formData,history,edit=false)=> async dispatch 
         
         dispatch({
             type: PROFILE_ERROR,
-            payload: { msg: error , status: error.response.status }
+            payload: { msg: error , status: error.response }
         });
    }
 }
@@ -73,7 +73,7 @@ export const addExperience= (formData, history)=> async dispatch => {
           
           dispatch({
               type: PROFILE_ERROR,
-              payload: { msg: error , status: error.response.status }
+              payload: { msg: error , status: error.response }
           });
      }
 }

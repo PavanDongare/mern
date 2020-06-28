@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import {connect } from 'react-router-dom'
 import Moment from 'react-moment' 
 
- const Experience = (experience) => {
+ const Experience = ({experience} ) => {
      const experiences = experience.map(exp=>(
-        <td key={exp._id}>
+        <tr key={exp._id}>
             <td> {exp.company} </td>
             <td className='hide-sm' > {exp.title} </td>
             <td> <Moment format='YYYY/MM/DD'>  {exp.from} </Moment> - {
@@ -15,7 +15,7 @@ import Moment from 'react-moment'
             <td>
                 <button className='btn btn-danger' > Delete  </button>
             </td>
-        </td>
+        </tr>
      ));
     return (
         <div>
@@ -25,8 +25,8 @@ import Moment from 'react-moment'
                     <tr>
                         <th>Company</th>
                         <th className='hide-sm'>Title</th>
-                        <th className='hide-sm'>Title</th>
-                        <th >Title</th>
+                        <th className='hide-sm'>From</th>
+                        <th >To</th>
                     </tr>
                 </thead>
             <tbody>{experiences}</tbody>
@@ -39,4 +39,4 @@ import Moment from 'react-moment'
     experience: PropTypes.array.isRequired,
 }
 
- export default Experience
+ export default Experience;
