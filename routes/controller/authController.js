@@ -2,7 +2,6 @@ const pool = require('../../dbConnection');
 const bcrypt = require('bcryptjs');
 const gravatar = require('gravatar');
 const { check, validationResult } = require('express-validator');
-const helperFunctions = require('./helperFunctions')
 
 
 getUserData= (req,res)=>{ 
@@ -61,8 +60,16 @@ signUpWithPassword = async (req,res)=>
 }
 
 
-deleteUser =()=>{
+deleteUser = async(req,res)=>{
     pool.query(` delete * FROM users where email='${ req.params.user_id}'`, 
+    (err,result)=>{
+        err ?  res.status(400).json(err) : 
+        result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result[0]);
+    })
+}
+
+deleteUserByToken =()=>{
+    pool.query(` delete * FROM users where email='${req.user.id}'`, 
     (err,result)=>{
         err ?  res.status(400).json(err) : 
         result.length==0 ? res.status(400).json('user not found'): res.status(200).json(result[0]);

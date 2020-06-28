@@ -79,4 +79,22 @@ export const addExperience= (formData, history)=> async dispatch => {
 }
 
 
+export const deleteAccount = () => async dispatch => {
+    if(window.confirm('are you sure?')){
+        try {
+            const res = await axios.delete(`/api/auth`);
+            dispatch({
+                type: UPDATE_PROFILE,
+                payload: null,
+            })
+        }
+        catch(error){
+            dispatch({
+                type: PROFILE_ERROR,
+                payload: null,
+            })
+        }
+    }
+}
+
 
