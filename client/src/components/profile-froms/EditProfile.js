@@ -57,7 +57,7 @@ const EditProfile = ({ profile:{profile,loading } ,createProfileAction,getCurren
             }
             setFormData(profileData);
 
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const onChange = e => {
         setFormData({...formData,[e.target.name] : e.target.value});

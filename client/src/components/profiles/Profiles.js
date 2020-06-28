@@ -14,7 +14,7 @@ const Profiles = ({getAllProfiles, profile:{ profiles,loading,profileData }}) =>
         getAllProfiles();
         console.log(profileData);
         //setProfileData(JSON.parse(profileData));
-    },[]);
+    },[getAllProfiles]);
     return (
         <Fragment>
             {
