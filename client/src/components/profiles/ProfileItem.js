@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -35,7 +35,12 @@ const ProfileItem = ({profile :{
         youtube,
         instagram, 
     } = localState;
-    //setProfileState({...localState,profileData});
+
+    useEffect(() => {
+        const temp = JSON.parse(profileData) ;// stupid backend gives it in string
+        setProfileState({ ...localState,...temp});
+    }, [])
+   
     return (
         <div className="profile bg-light">
             <img  className="round-img"/>
