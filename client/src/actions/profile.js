@@ -4,7 +4,8 @@ import { setAlert } from './alertAction';
 import {
     GET_PROFILE,
     PROFILE_ERROR,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    DELETE_ACCOUNT
 } from './types'; 
 
 // get current users profile
@@ -84,9 +85,10 @@ export const deleteAccount = () => async dispatch => {
         try {
             const res = await axios.delete(`/api/auth`);
             dispatch({
-                type: UPDATE_PROFILE,
+                type: DELETE_ACCOUNT,
                 payload: null,
             })
+            dispatch(setAlert('Your Account is deleted'));
         }
         catch(error){
             dispatch({

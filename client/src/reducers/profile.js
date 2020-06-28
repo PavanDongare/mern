@@ -32,7 +32,7 @@ export default function(state = initialState, action){
                 ...state,
                 profile: null,
             }
-        case CLEAR_PROFILE:
+        case CLEAR_PROFILE:  
             return{
                 ...state,
                 profile: null,
