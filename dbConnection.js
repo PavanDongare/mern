@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const config = {
     host: 'localhost', // only private ip here
     user: 'pavan',
-    password:'dongare',
+    password:'pavandongare',
     database: 'devconnect',
 };
 

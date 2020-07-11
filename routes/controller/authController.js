@@ -24,9 +24,11 @@ loginWithPassword = async (req,res)=>
         pool.query(`select * from user where email = '${req.body.email}' `,
         async (err,sqlResult)=>{
            
-            if(sqlResult.length>=1){    
+            if(sqlResult){    
                 const passwordFromTable =  sqlResult[0]['password']; 
+                console.log('user pass-',req.body.password,'table pass-',passwordFromTable)
                 const isMatch =  await bcrypt.compare(req.body.password,passwordFromTable);
+
                 isMatch ? helperFunctions.sendJwt(req,res): res.status(400).json('wrong password'); 
             } 
             else {
